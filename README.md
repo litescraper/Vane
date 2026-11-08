@@ -148,6 +148,21 @@ If you prefer to build from source or need more control:
 
 See the [installation documentation](https://github.com/ItzCrazyKns/Vane/tree/master/docs/installation) for more information like updating, etc.
 
+### Optional Web Search Provider
+
+The `web_search` research action defaults to SearXNG. To use the optional
+first-party Litescrape provider, set `WEB_SEARCH_PROVIDER=litescrape` and
+`LITESCRAPE_API_KEY` in the server environment. `LITESCRAPE_BASE_URL` defaults
+to `https://api.litescrape.com`. The adapter uses the native
+`GET /api/google/search` API with bearer authentication.
+
+Only web search uses this provider. Academic, discussion, image, video,
+Discover, and other SearXNG features remain unchanged and still require
+SearXNG. Queries are sent to the selected external provider. Results contain
+titles, URLs, and snippets, not full pages or search suggestions; the existing
+quality-mode scraper still handles page retrieval. For Docker, pass these
+variables with `-e` when starting a source-built image.
+
 ### Troubleshooting
 
 #### Local OpenAI-API-Compliant Servers

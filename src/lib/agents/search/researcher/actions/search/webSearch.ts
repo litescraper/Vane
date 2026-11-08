@@ -2,6 +2,7 @@ import z from 'zod';
 import { ResearchAction } from '../../../types';
 import { ResearchBlock } from '@/lib/types';
 import { executeSearch } from './baseSearch';
+import { searchWeb } from '@/lib/webSearch';
 
 const actionSchema = z.object({
   type: z.literal('web_search'),
@@ -96,6 +97,7 @@ const webSearchAction: ResearchAction<typeof actionSchema> = {
     if (!researchBlock) throw new Error('Failed to retrieve research block');
 
     const results = await executeSearch({
+      search: searchWeb,
       llm: additionalConfig.llm,
       embedding: additionalConfig.embedding,
       mode: additionalConfig.mode,

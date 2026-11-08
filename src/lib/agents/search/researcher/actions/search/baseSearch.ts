@@ -13,12 +13,14 @@ export const executeSearch = async (input: {
   queries: string[];
   mode: SearchAgentConfig['mode'];
   searchConfig?: SearxngSearchOptions;
+  search?: typeof searchSearxng;
   researchBlock: ResearchBlock;
   session: InstanceType<typeof SessionManager>;
   llm: BaseLLM<any>;
   embedding: BaseEmbedding<any>;
 }) => {
   const researchBlock = input.researchBlock;
+  const searchBackend = input.search || searchSearxng;
 
   researchBlock.data.subSteps.push({
     id: crypto.randomUUID(),
@@ -41,7 +43,7 @@ export const executeSearch = async (input: {
     const results: Chunk[] = [];
 
     const search = async (q: string) => {
-      const res = await searchSearxng(q, {
+      const res = await searchBackend(q, {
         ...(input.searchConfig ? input.searchConfig : {}),
       });
 
@@ -176,7 +178,7 @@ export const executeSearch = async (input: {
     const searchResults: Chunk[] = [];
 
     const search = async (q: string) => {
-      const res = await searchSearxng(q, {
+      const res = await searchBackend(q, {
         ...(input.searchConfig ? input.searchConfig : {}),
       });
 

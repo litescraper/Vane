@@ -148,6 +148,22 @@ If you prefer to build from source or need more control:
 
 See the [installation documentation](https://github.com/ItzCrazyKns/Vane/tree/master/docs/installation) for more information like updating, etc.
 
+### Optional Web Search Provider
+
+The `web_search` research action defaults to SearXNG. To use the optional
+Serper-compatible provider, set `WEB_SEARCH_PROVIDER=serper` and
+`SERPER_API_KEY` in the server environment. `SERPER_BASE_URL` defaults to
+`https://google.serper.dev`; use a base URL without the `/search` path.
+
+Support any Serper.dev-compatible endpoint (like litescrape.com, serpbase.dev, serpensapi.org, and others)
+
+Only web search uses this provider. Academic, discussion, image, video,
+Discover, and other SearXNG features remain unchanged and still require
+SearXNG. Queries are sent to the selected external provider. Results contain
+titles, URLs, and snippets, not full pages or search suggestions; the existing
+quality-mode scraper still handles page retrieval. For Docker, pass these
+variables with `-e` when starting a source-built image.
+
 ### Troubleshooting
 
 #### Local OpenAI-API-Compliant Servers
